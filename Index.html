@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compose Your Perfect Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            background: linear-gradient(180deg, #FAFAF8 0%, #F5F3F0 50%, #F9F7F4 100%);
+            min-height: 100vh;
+            padding: 80px 20px;
+            color: #1a1a1a;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 120px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header-accent {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #8B6F47;
+            margin-bottom: 24px;
+            font-family: 'Lora', serif;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 72px;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .header-divider {
+            height: 2px;
+            width: 60px;
+            background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+            margin: 32px auto;
+        }
+
+        .header-subtitle {
+            font-size: 17px;
+            color: #666;
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        /* Menus Grid */
+        .menus-section {
+            margin-bottom: 140px;
+        }
+
+        .menus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 50px;
+            margin-bottom: 0;
+        }
+
+        .menu-card {
+            background: #FFFFFF;
+            padding: 70px 50px;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            border-top: 6px solid;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .menu-card:hover {
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.12);
+            transform: translateY(-8px);
+        }
+
+        .med { border-top-color: #8B6F47; }
+        .sea { border-top-color: #05527C; }
+        .lazy { border-top-color: #5A8A42; }
+
+        /* Menu Header */
+        .menu-header {
+            text-align: center;
+            margin-bottom: 55px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            padding-bottom: 40px;
+        }
+
+        .menu-icon {
+            font-size: 52px;
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        .menu-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .menu-tagline {
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin: 0;
+            opacity: 0.7;
+        }
+
+        .med .menu-tagline { color: #8B6F47; }
+        .sea .menu-tagline { color: #05527C; }
+        .lazy .menu-tagline { color: #5A8A42; }
+
+        /* Courses */
+        .course {
+            margin-bottom: 50px;
+        }
+
+        .course:last-child {
+            margin-bottom: 0;
+        }
+
+        .course-title {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            font-family: 'Lora', serif;
+        }
+
+        .med .course-title { color: #8B6F47; }
+        .sea .course-title { color: #05527C; }
+        .lazy .course-title { color: #5A8A42; }
+
+        /* Options */
+        .radio-option {
+            margin-bottom: 16px;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 18px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .med .radio-label:hover {
+            background: rgba(139, 111, 71, 0.05);
+        }
+
+        .sea .radio-label:hover {
+            background: rgba(5, 82, 124, 0.05);
+        }
+
+        .lazy .radio-label:hover {
+            background: rgba(123, 182, 97, 0.05);
+        }
+
+        input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            cursor: pointer;
+            flex-shrink: 0;
+            accent-color: #8B6F47;
+        }
+
+        .sea input[type="radio"] { accent-color: #05527C; }
+        .lazy input[type="radio"] { accent-color: #5A8A42; }
+
+        .option-content {
+            flex: 1;
+        }
+
+        .option-name {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .option-description {
+            font-size: 13px;
+            color: #888;
+            font-style: italic;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        input[type="radio"]:checked + .radio-label {
+            background: rgba(0, 0, 0, 0.04);
+        }
+
+        .med input[type="radio"]:checked + .radio-label {
+            background: rgba(139, 111, 71, 0.12);
+        }
+
+        .sea input[type="radio"]:checked + .radio-label {
+            background: rgba(5, 82, 124, 0.12);
+        }
+
+        .lazy input[type="radio"]:checked + .radio-label {
+            background: rgba(123, 182, 97, 0.12);
+        }
+
+        /* Selection Summary */
+        .summary-section {
+            margin-top: 140px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .summary-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .summary-accent {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #8B6F47;
+            margin-bottom: 24px;
+        }
+
+        .summary-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 64px;
+            font-weight: 400;
+            margin-bottom: 0;
+            letter-spacing: -1px;
+        }
+
+        /* Selected Courses Display */
+        .selected-courses {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .selected-item {
+            background: #FFFFFF;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+            border-left: 5px solid;
+            transition: all 0.4s ease;
+        }
+
+        .selected-item:hover {
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+        }
+
+        .selected-item.med { border-left-color: #8B6F47; }
+        .selected-item.sea { border-left-color: #05527C; }
+        .selected-item.lazy { border-left-color: #5A8A42; }
+
+        .selected-type {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            font-family: 'Lora', serif;
+        }
+
+        .selected-item.med .selected-type { color: #8B6F47; }
+        .selected-item.sea .selected-type { color: #05527C; }
+        .selected-item.lazy .selected-type { color: #5A8A42; }
+
+        .selected-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .selected-description {
+            font-size: 13px;
+            color: #777;
+            font-style: italic;
+            margin-bottom: 16px;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .selected-menu {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .selected-item.med .selected-menu { color: #8B6F47; }
+        .selected-item.sea .selected-menu { color: #05527C; }
+        .selected-item.lazy .selected-menu { color: #5A8A42; }
+
+        /* Footer */
+        .summary-footer {
+            text-align: center;
+            padding-top: 50px;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            font-size: 12px;
+            color: #999;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 50px 16px;
+            }
+
+            h1 {
+                font-size: 44px;
+            }
+
+            .menus-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .menu-card {
+                padding: 50px 36px;
+            }
+
+            .summary-title {
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-accent">~ Curated Selection ~</div>
+            <h1>Compose Your Perfect Repast</h1>
+            <div class="header-divider"></div>
+            <p class="header-subtitle">Select freely from our three menus. Mix and match each course to create your ideal culinary experience.</p>
+        </header>
+
+        <!-- Menus -->
+        <section class="menus-section">
+            <div class="menus-grid">
+                <!-- Mediterranean -->
+                <div class="menu-card med">
+                    <div class="menu-header">
+                        <span class="menu-icon">🏖️</span>
+                        <h2 class="menu-title">Mediterranean</h2>
+                        <p class="menu-tagline">Sun-kissed coasts</p>
+                    </div>
+
+                    <div class="course">
+                        <div class="course-title">First Course</div>
+                        <div class="radio-option">
+                            <input type="radio" id="med-e1" name="entree" value="med-e1" onchange="updateSelection()">
+                            <label for="med-e1" class="radio-label">
+                                <div class="option-content">
+                                    <div class="option-name">Eggplant Caviar</div>
+                                    <div class="option-description">Roasted eggplant, aged garlic and finest olive oil</div>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="med-e2" name="entree" value="med-e2" onchange="updateSelection()">
+                            <label for="med-e2" class="radio-label">
+                                <div class="option-content">
+                                    <div class="option-name">Greek Salad</div>
+                                    <div class="option-description">Heirloom tomatoes, creamy Feta, Kalamata olives with wild herbs</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="course">
+                        <div class="course-title">Main Course</div>
+                        <div class="radio-option">
+                            <input type="radio" id="med-p1" name="plat" value="med-p1" onchange="updateSelection()">
+                            <label for="med-p1" class="radio-label">
+                                <div class="option-content">
+                                    <div class="option-name">Herb-Roasted Chicken</div>
+                                    <div class="option-description">Free-range bird with thyme and rosemary, seasonal root vegetables</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="course">
+                        <div class="course-title">Dessert</div>
+                        <div class="radio-option">
+                            <input type="radio" id="med-d1" name="dessert" value="med-d1" onchange="updateSelection()">
+                            <label for="med-d1" class="radio-label">
+                                <div class="option-content">
+                                    <div class="option-name">Chocolate Fondant</div>
+                                    <div class="option-description">Decadent dark chocolate with almond flour, red berry coulis</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- From the Sea -->
+                <div class="menu-card sea">
+                    <div class="menu-header">
+                        <span class="menu-icon">🐚</span>
+                        <h2 class="menu-title">From the Sea</h2>
+                        <p class="menu-tagline">Ocean treasures</p>
+                    </div>
+
+                    <div class="course">
+                        <div class="course-title">First Course</div>
+                        <div class="radio-option">
+                            <input type="radio" id="sea-e1" name="entree" value="sea-e1" onchange="updateSelection()">
+                            <label for="sea-e1" class="radio-label">
+                                <div class="option-content">
+                                    <div class="option-name">Salmon Tartare</div>
+                                    <div class="option-description">Premium salmon, ripe mango and fresh lime</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="course">
+                        <div class="course-title">Main Course</div>
+                        <div class="radio-option">
+                            <input type="radio" id="sea-p1" name="plat" value="sea-p1" onchange="updateSelection()">
+                            <label for="sea-p1" class="radio-label">
+                                <div class="option-content">
+                                    <div class="option-name">Roasted Salmon</div>
+                                    <div class="option-description">Atlantic salmon with caramelized sweet potato and honey-balsamic vegetables</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="course">
+                        <div class="course-title">Dessert</div>
+                        <div class="radio-option">
+                            <input type="radio" id="sea-d1" name="dessert" value="sea-d1" onchange="updateSelection()">
+                            <label for="sea-d1" class="radio-label">
+                                <div class="option-content">
+                                    <div class="option-name">Citrus Panna Cotta</div>
+                                    <div class="option-description">Silken lemon and passion fruit cream, a taste of summer</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- The Lazy -->
+                <div class="menu-card lazy">
+                    <div class="menu-header">
+                        <span class="menu-icon">✨</span>
+                        <h2 class="menu-title">The Lazy</h2>
+                        <p class="menu-tagline">Summer ease, refined</p>
+                    </div>
+
+                    <div class="course">
+                        <div class="course-title">First Course</div>
+                        <div class="radio-option">
+                            <input type="radio" id="lazy-e1" name="entree" value="lazy-e1" onchange="updateSelection()">
+                            <label for="lazy-e1" class="radio-label">
+                                <div class="option-content">
+                                    <div class="option-name">Chilled Zucchini Soup</div>
+                                    <div class="option-description">Silky summer vegetables, delicately chilled</div>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="lazy-e2" name="entree" value="lazy-e2" onchange="updateSelection()">
+                            <label for="lazy-e2" class="radio-label">
+                                <div class="option-content">
+                                    <div class="option-name">Homemade Hummus</div>
+                                    <div class="option-description">House-made legume purée with fresh seasonal vegetables</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="course">
+                        <div class="course-title">Main Course</div>
+                        <div class="radio-option">
+                            <input type="radio" id="lazy-p1" name="plat" value="lazy-p1" onchange="updateSelection()">
+                            <label for="lazy-p1" class="radio-label">
+                                <div class="option-content">
+                                    <div class="option-name">Summer Frittata</div>
+                                    <div class="option-description">Farm-fresh eggs with zucchini, peppers, chicken and caramelized onions</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="course">
+                        <div class="course-title">Dessert</div>
+                        <div class="radio-option">
+                            <input type="radio" id="lazy-d1" name="dessert" value="lazy-d1" onchange="updateSelection()">
+                            <label for="lazy-d1" class="radio-label">
+                                <div class="option-content">
+                                    <div class="option-name">Fresh Berries</div>
+                                    <div class="option-description">Seasonal fruits at peak ripeness with fresh mint</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Summary -->
+        <section class="summary-section">
+            <div class="summary-header">
+                <div class="summary-accent">~ Your Selection ~</div>
+                <h2 class="summary-title">Your Curated Menu</h2>
+            </div>
+
+            <div class="selected-courses">
+                <div class="selected-item med">
+                    <div class="selected-type">🥗 First Course</div>
+                    <div class="selected-name" id="entree-name">Select a starter</div>
+                    <div class="selected-description" id="entree-desc"></div>
+                    <div class="selected-menu" id="entree-menu"></div>
+                </div>
+
+                <div class="selected-item sea">
+                    <div class="selected-type">🍽️ Main Course</div>
+                    <div class="selected-name" id="plat-name">Select a main</div>
+                    <div class="selected-description" id="plat-desc"></div>
+                    <div class="selected-menu" id="plat-menu"></div>
+                </div>
+
+                <div class="selected-item lazy">
+                    <div class="selected-type">🍰 Dessert</div>
+                    <div class="selected-name" id="dessert-name">Select a dessert</div>
+                    <div class="selected-description" id="dessert-desc"></div>
+                    <div class="selected-menu" id="dessert-menu"></div>
+                </div>
+            </div>
+
+            <div class="summary-footer">
+                Gluten-free • Prepared with care • Delivered fresh
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const menus = {
+            'med-e1': { name: 'Eggplant Caviar', desc: 'Roasted eggplant, aged garlic and finest olive oil', menu: 'Mediterranean' },
+            'med-e2': { name: 'Greek Salad', desc: 'Heirloom tomatoes, creamy Feta, Kalamata olives with wild herbs', menu: 'Mediterranean' },
+            'med-p1': { name: 'Herb-Roasted Chicken', desc: 'Free-range bird with thyme and rosemary, accompanied by seasonal root vegetables', menu: 'Mediterranean' },
+            'med-d1': { name: 'Chocolate Fondant', desc: 'Decadent dark chocolate with almond flour, dressed with red berry coulis', menu: 'Mediterranean' },
+            'sea-e1': { name: 'Salmon Tartare', desc: 'Premium salmon, ripe mango and fresh lime', menu: 'From the Sea' },
+            'sea-p1': { name: 'Roasted Salmon', desc: 'Atlantic salmon fillet with caramelized sweet potato and honey-balsamic glazed root vegetables', menu: 'From the Sea' },
+            'sea-d1': { name: 'Citrus Panna Cotta', desc: 'Silken lemon and passion fruit cream, a taste of summer', menu: 'From the Sea' },
+            'lazy-e1': { name: 'Chilled Zucchini Soup', desc: 'Silky summer vegetables, delicately chilled', menu: 'The Lazy' },
+            'lazy-e2': { name: 'Homemade Hummus', desc: 'House-made legume purée with fresh seasonal vegetables', menu: 'The Lazy' },
+            'lazy-p1': { name: 'Summer Frittata', desc: 'Farm-fresh eggs with zucchini, peppers, chicken and caramelized onions', menu: 'The Lazy' },
+            'lazy-d1': { name: 'Fresh Berries', desc: 'Seasonal fruits at peak ripeness with fresh mint', menu: 'The Lazy' }
+        };
+
+        function updateSelection() {
+            const entree = document.querySelector('input[name="entree"]:checked')?.value;
+            const plat = document.querySelector('input[name="plat"]:checked')?.value;
+            const dessert = document.querySelector('input[name="dessert"]:checked')?.value;
+
+            if (entree && menus[entree]) {
+                document.getElementById('entree-name').textContent = menus[entree].name;
+                document.getElementById('entree-desc').textContent = menus[entree].desc;
+                document.getElementById('entree-menu').textContent = menus[entree].menu;
+            }
+
+            if (plat && menus[plat]) {
+                document.getElementById('plat-name').textContent = menus[plat].name;
+                document.getElementById('plat-desc').textContent = menus[plat].desc;
+                document.getElementById('plat-menu').textContent = menus[plat].menu;
+            }
+
+            if (dessert && menus[dessert]) {
+                document.getElementById('dessert-name').textContent = menus[dessert].name;
+                document.getElementById('dessert-desc').textContent = menus[dessert].desc;
+                document.getElementById('dessert-menu').textContent = menus[dessert].menu;
+            }
+        }
+
+        // Initialize with defaults
+        document.getElementById('med-e1').checked = true;
+        document.getElementById('med-p1').checked = true;
+        document.getElementById('med-d1').checked = true;
+        updateSelection();
+    </script>
+</body>
+</html>
